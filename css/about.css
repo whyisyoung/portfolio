@@ -1,0 +1,135 @@
+.about-container {
+    max-width: var(--page-max-width);
+    margin: 0 auto;
+    padding: 0 var(--page-pad-x) 5rem;
+    font-family: 'Raleway', sans-serif;
+    line-height: 1.55;
+    color: #333;
+    box-sizing: border-box;
+}
+
+.about-container h1 {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 2.2rem;
+    letter-spacing: .05em;
+    font-weight: 400;
+    margin: 0 0 1.2rem;
+}
+
+
+.about-section h2 {
+    font: 600 .8rem/1.05 'Raleway', sans-serif;
+    /* slightly larger & bolder */
+    letter-spacing: .22em;
+    /* a touch tighter for readability at bigger size */
+    text-transform: uppercase;
+    color: #444;
+    /* a bit darker to stand out */
+    margin: 0 0 1.1rem;
+    position: relative;
+}
+
+.about-section p {
+    margin: 0 0 1.55rem;
+    /* increased spacing for readability */
+    font-size: .95rem;
+    line-height: 1.62;
+}
+
+.about-section p:last-child {
+    margin-bottom: 2.1rem;
+}
+
+/* Extra vertical rhythm tweaks */
+#interests {
+    margin-top: 3.2rem;
+}
+
+#why-peace {
+    margin-top: 3.4rem;
+}
+
+/* Tighten space between animation intro paragraph and table */
+#interests .anime-table-wrapper {
+    margin-top: -0.6rem;
+}
+
+.about-section ul {
+    list-style: none;
+    padding: 0;
+    margin: .4rem 0 1.2rem;
+}
+
+.about-section ul li {
+    margin: 0 0 .45rem;
+}
+
+.emoji {
+    margin-right: .45rem;
+}
+
+.anime-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin: 0 0 2rem;
+}
+
+.anime-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+    font-size: .85rem;
+    white-space: nowrap;
+}
+
+.anime-table td {
+    border: 1px solid #d9d9d9;
+    padding: 6px 10px;
+    vertical-align: middle;
+}
+
+.anime-table tr:nth-child(odd) td {
+    background: #fafafa;
+}
+
+.anime-table tr:hover td {
+    background: #f2f2f2;
+}
+
+.tagline {
+    font-style: italic;
+    color: #555;
+}
+
+@media (max-width:768px) {
+    .about-container {
+        padding: 0 40px 4rem;
+    }
+
+    .anime-table {
+        font-size: .82rem;
+    }
+
+    .anime-table td {
+        padding: 6px 8px;
+    }
+}
+
+@media (max-width:480px) {
+    .about-container {
+        padding: 0 28px 4rem;
+    }
+
+    .anime-table {
+        font-size: .8rem;
+    }
+
+    .anime-table td {
+        padding: 6px 6px;
+    }
+}
+
+.about-container .about-section:first-of-type {
+    margin-top: 0.9rem;
+    /* further reduced for tighter spacing */
+}

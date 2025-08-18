@@ -1,89 +1,50 @@
 ---
 ---
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <title>{{ site.title }}</title>
-    {% include favicon.html %}
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <!-- <link rel="stylesheet" type="text/css" href="css/zoom.css"> -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zoom-vanilla.js/dist/zoom.css"> -->
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
-    <script src="https://use.fontawesome.com/4c9066f1a6.js"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45384067-3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<!DOCTYPE html>
+<html lang="en">
 
-      gtag('config', 'UA-45384067-3');
-    </script>
-  </head>
-  <body>
-    <div id="container">
-      <!--------------- YOUR NAME OVER HERE -------------->
-      <!-- <h2 class="header">{{ site.full_name }}</h2> -->
-      <h2 class="header"><a href="https://instagram.com/whyisyoung" target="_blank">@Whyisyoung</a></h2>
-      <div style="padding: 10px; background-color: #1772d01c; color: rgb(132 133 135 / 1); line-height: 1.5em;">
-        <h4>
-          For the best experience, please use desktop browsers. If you use iPhone or iPad, you may force touch an image for better quality. <br>
-          For any inquiries, please contact whyisyoung.foto@gmail.com.
-        </h4>
-      </div>
-      <br> <br>
-      <div id="gallery">
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limin Yang's Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Raleway:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="site-header-inner">
+      <h1 class="site-title"><a href="index.html" class="site-title-link">LIMIN YANG</a></h1>
+      <nav class="site-nav">
+        <!-- <a href="#" class="nav-link active" data-filter="all">All</a> -->
+        <a href="#lifestyle" class="nav-link" data-filter="lifestyle">Lifestyle</a>
+        <a href="#architecture" class="nav-link" data-filter="architecture">Architecture</a>
+        <a href="about.html" class="nav-link">About</a>
+      </nav>
     </div>
-    <!-- <a href="https://github.com/andyzg/gallery"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a> -->
-    <div class="footer">
-      <div class="links">
-        <!-- <a id="instagram" class="links__icon" href="https://www.instagram.com/{{ site.instagram }}"> -->
-          <!-- <span class="view-ig"> View {{ site.full_name }}'s Instagram </span> -->
-          <!-- <i class="fa fa-instagram fa-lg"></i> -->
-        <!-- </a> -->
-        <p>&copy; 2024 WHYISYOUNG </p>
-      </div>
+  </header>
+  <div class="header-spacer"></div>
+
+  <main class="gallery-container">
+    <div class="gallery-grid" id="gallery">
+      <!-- Images will be loaded here -->
     </div>
-  </body>
-  <script
-    src="https://code.jquery.com/jquery-3.2.1.js"
-    integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.js"></script>
-  <script src="js/transition.js"></script>
-  <!-- <script src="js/zoom.min.js"></script>-->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/zoom-vanilla.js/dist/zoom-vanilla.min.js"></script> -->
-  <script src="js/gallery.js"></script>
-  <script src="js/medium-zoom.min.js"></script>
+  </main>
 
-  <!-- <img src="photos/Architecture/1.jpg" height="170px" alt="test">
-  <img src="photos/Architecture/2.jpg" height="170px" alt="test"> -->
+  <div class="lightbox" id="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+    <div class="nav-buttons">
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+    </div>
+  </div>
 
-  <script>
-    var COLUMNS = 'columns';
-    var ROWS = 'rows';
-    var SQUARES = 'squares';
-
-    var columns = COLUMNS;
-    var rows = ROWS;
-    var squares = SQUARES;
-
-    var layoutStyle = {{ site.layout_style }};
-
-    var configuration = {
-      spacing: {{ site.spacing }},
-      shuffle: {{ site.shuffle }},
-      columns: {{ site.columns }},
-      maxHeight: {{ site.max_height }}
-    };
-  </script>
-
+  {% include footer.html %}
   <script src="js/script.js"></script>
-  <!-- <script>
-    mediumZoom("img", { margin: 48 });
-  </script> -->
-  <!-- <script src="js/index.js"></script> -->
+</body>
 
 </html>

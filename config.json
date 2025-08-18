@@ -1,14 +1,6 @@
 {
   "Lifestyle": [
     {
-      "width": 1510,
-      "height": 1000,
-      "path": "./photos/Lifestyle/Limin_Yang_Stain_DSC_9992.jpg",
-      "compressed_path": "./photos/Lifestyle/Limin_Yang_Stain_DSC_9992.min.jpg",
-      "compressed": false,
-      "placeholder_path": "./photos/Lifestyle/Limin_Yang_Stain_DSC_9992.placeholder.jpg"
-    },
-    {
       "width": 1500,
       "height": 1000,
       "path": "./photos/Lifestyle/Limin_Yang_SixSeven_HAI_0292.jpg",
@@ -97,14 +89,6 @@
       "placeholder_path": "./photos/Lifestyle/Limin_Yang_Dior_DSC_6895_s.placeholder.jpg"
     },
     {
-      "width": 1498,
-      "height": 1000,
-      "path": "./photos/Lifestyle/Limin_Yang_LondonPlane_DSC_6314.jpg",
-      "compressed_path": "./photos/Lifestyle/Limin_Yang_LondonPlane_DSC_6314.min.jpg",
-      "compressed": false,
-      "placeholder_path": "./photos/Lifestyle/Limin_Yang_LondonPlane_DSC_6314.placeholder.jpg"
-    },
-    {
       "width": 1000,
       "height": 1508,
       "path": "./photos/Lifestyle/Limin_Yang_APPARATUS_326108-01-0027.jpg",
@@ -135,14 +119,6 @@
       "compressed_path": "./photos/Lifestyle/Limin_Yang_LA_2532-5-edit.min.jpg",
       "compressed": false,
       "placeholder_path": "./photos/Lifestyle/Limin_Yang_LA_2532-5-edit.placeholder.jpg"
-    },
-    {
-      "width": 1080,
-      "height": 1475,
-      "path": "./photos/Lifestyle/Limin_Yang_34794-2-0005.jpg",
-      "compressed_path": "./photos/Lifestyle/Limin_Yang_34794-2-0005.min.jpg",
-      "compressed": false,
-      "placeholder_path": "./photos/Lifestyle/Limin_Yang_34794-2-0005.placeholder.jpg"
     },
     {
       "width": 1606,
@@ -218,14 +194,6 @@
     },
     {
       "width": 1000,
-      "height": 1498,
-      "path": "./photos/Lifestyle/Limin_Yang_Hailey_1705.jpg",
-      "compressed_path": "./photos/Lifestyle/Limin_Yang_Hailey_1705.min.jpg",
-      "compressed": false,
-      "placeholder_path": "./photos/Lifestyle/Limin_Yang_Hailey_1705.placeholder.jpg"
-    },
-    {
-      "width": 1000,
       "height": 1510,
       "path": "./photos/Lifestyle/Limin_Yang_KAFE_DSC_0400.jpg",
       "compressed_path": "./photos/Lifestyle/Limin_Yang_KAFE_DSC_0400.min.jpg",
@@ -281,28 +249,12 @@
       "placeholder_path": "./photos/Lifestyle/Limin_Yang_GZ_IMG_3835.placeholder.jpg"
     },
     {
-      "width": 1510,
-      "height": 1000,
-      "path": "./photos/Lifestyle/Limin_Yang_Stain_DSC_0013.jpg",
-      "compressed_path": "./photos/Lifestyle/Limin_Yang_Stain_DSC_0013.min.jpg",
-      "compressed": false,
-      "placeholder_path": "./photos/Lifestyle/Limin_Yang_Stain_DSC_0013.placeholder.jpg"
-    },
-    {
       "width": 1000,
       "height": 1191,
       "path": "./photos/Lifestyle/Limin_Yang_Noguchi_IMG_8453_s.jpg",
       "compressed_path": "./photos/Lifestyle/Limin_Yang_Noguchi_IMG_8453_s.min.jpg",
       "compressed": false,
       "placeholder_path": "./photos/Lifestyle/Limin_Yang_Noguchi_IMG_8453_s.placeholder.jpg"
-    },
-    {
-      "width": 1080,
-      "height": 1475,
-      "path": "./photos/Lifestyle/Limin_Yang_34794-1-0012.jpg",
-      "compressed_path": "./photos/Lifestyle/Limin_Yang_34794-1-0012.min.jpg",
-      "compressed": false,
-      "placeholder_path": "./photos/Lifestyle/Limin_Yang_34794-1-0012.placeholder.jpg"
     },
     {
       "width": 1000,
@@ -537,14 +489,6 @@
       "compressed_path": "./photos/Architecture/Limin_Yang_7.min.jpg",
       "compressed": false,
       "placeholder_path": "./photos/Architecture/Limin_Yang_7.placeholder.jpg"
-    },
-    {
-      "width": 1500,
-      "height": 1000,
-      "path": "./photos/Architecture/Limin_Yang_IMG_3382.jpg",
-      "compressed_path": "./photos/Architecture/Limin_Yang_IMG_3382.min.jpg",
-      "compressed": false,
-      "placeholder_path": "./photos/Architecture/Limin_Yang_IMG_3382.placeholder.jpg"
     },
     {
       "width": 1000,
