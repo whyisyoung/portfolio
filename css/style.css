@@ -10,7 +10,8 @@
   --page-pad-x: 56px;
   --header-right-adjust: 32px;
   /* Title typography */
-  --site-title-size: 1.72rem;
+  --site-title-size: 2.06rem;
+  /* 1.2x previous 1.72rem */
   /* refined size */
   --site-title-spacing: 0.045em;
   /* minimal slim tracking */
@@ -61,6 +62,62 @@ body {
   align-items: flex-end;
   justify-content: space-between;
   box-sizing: border-box;
+}
+
+/* Hamburger button */
+.nav-toggle {
+  position: relative;
+  align-self: flex-end;
+  margin-left: auto;
+  width: 30px;
+  /* slim */
+  height: var(--site-title-size);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  display: none;
+  cursor: pointer;
+  z-index: 500;
+}
+
+/* Thin 1px bars baseline-aligned: cluster sits just above bottom to match title baseline */
+.nav-toggle span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #111;
+  border-radius: 0;
+  transition: .32s ease;
+  top: auto;
+}
+
+/* Use bottom offsets so lowest bar hugs the baseline; gaps = 8px */
+.nav-toggle span:nth-child(3) {
+  bottom: 0;
+}
+
+.nav-toggle span:nth-child(2) {
+  bottom: 8px;
+}
+
+.nav-toggle span:nth-child(1) {
+  bottom: 16px;
+}
+
+/* Open (X) state: move top/bottom bars to middle line (8px from bottom) */
+.nav-toggle.open span:nth-child(1) {
+  bottom: 8px;
+  transform: rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+  bottom: 8px;
+  transform: rotate(-45deg);
 }
 
 .site-title {
@@ -160,26 +217,81 @@ body {
 
 @media (max-width:640px) {
   .site-header {
-    padding: 24px 0 18px;
+    padding: 20px 0 16px;
   }
 
+  /* Align hamburger with gallery padding (remove extra right adjust) */
   .site-header-inner {
-    padding-left: 28px;
-    padding-right: calc(28px + var(--header-right-adjust));
+    padding-left: 26px;
+    padding-right: 26px;
+    flex-direction: row;
+    align-items: flex-end;
   }
 
   .site-title {
-    font-size: 0.58rem;
-    letter-spacing: 0.36em;
+    font-size: clamp(1.34rem, 6.0vw, 1.78rem);
+    line-height: 1;
+    letter-spacing: 0.075em;
+    margin: 0;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  /* Ensure hamburger matches the exact visual height of title */
+  .nav-toggle {
+    height: clamp(1.34rem, 6.0vw, 1.78rem);
   }
 
   .site-nav {
-    gap: 28px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 18px 26px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-bottom: 1px solid #eee;
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .35s ease, transform .4s cubic-bezier(.4, .6, .25, 1);
+  }
+
+  .site-nav.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-toggle {
+    display: flex;
   }
 
   .nav-link {
-    font-size: 0.5rem;
-    letter-spacing: 0.24em;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    padding: 8px 0 6px;
+  }
+
+  .header-spacer {
+    height: 86px;
+  }
+}
+
+@media (max-width:420px) {
+  .site-nav {
+    gap: 8px;
+  }
+
+  .nav-link {
+    font-size: 0.64rem;
+    letter-spacing: 0.16em;
+  }
+
+  .header-spacer {
+    height: 134px;
   }
 }
 
@@ -196,6 +308,7 @@ body {
   box-sizing: border-box;
 }
 
+/* Justified row layout across all viewports */
 .gallery-grid {
   display: block;
   margin-top: 1rem;
@@ -219,6 +332,47 @@ body {
 
 .gallery-item:last-child {
   margin-right: 0;
+}
+
+.gallery-item:hover {
+  opacity: .8;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive spacing tweaks for smaller widths */
+@media (max-width:900px) {
+  .gallery-row {
+    margin-bottom: 20px;
+  }
+
+  .gallery-item {
+    margin-right: 20px;
+  }
+}
+
+@media (max-width:640px) {
+  .gallery-row {
+    margin-bottom: 16px;
+  }
+
+  .gallery-item {
+    margin-right: 16px;
+  }
+}
+
+@media (max-width:480px) {
+  .gallery-row {
+    margin-bottom: 14px;
+  }
+
+  .gallery-item {
+    margin-right: 14px;
+  }
 }
 
 .gallery-item:hover {
@@ -312,27 +466,11 @@ body {
   .gallery-container {
     padding: 0 40px 3rem;
   }
-
-  .gallery-row {
-    margin-bottom: 18px;
-  }
-
-  .gallery-item {
-    margin-right: 18px;
-  }
 }
 
-@media (max-width:480px) {
+@media (max-width:440px) {
   .gallery-container {
-    padding: 0 28px 3rem;
-  }
-
-  .gallery-row {
-    margin-bottom: 12px;
-  }
-
-  .gallery-item {
-    margin-right: 12px;
+    padding: 0 24px 3rem;
   }
 }
 

@@ -1,4 +1,5 @@
 ---
+about: true
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -16,17 +17,7 @@
 </head>
 
 <body>
-    <header class="site-header">
-        <div class="site-header-inner">
-            <h1 class="site-title"><a href="index.html" class="site-title-link">LIMIN YANG</a></h1>
-            <nav class="site-nav">
-                <a href="index.html#lifestyle" class="nav-link" data-filter="lifestyle">Lifestyle</a>
-                <a href="index.html#architecture" class="nav-link" data-filter="architecture">Architecture</a>
-                <a href="about.html" class="nav-link active">About</a>
-            </nav>
-        </div>
-    </header>
-    <div class="header-spacer"></div>
+    {% include header.html %}
     <main class="about-container">
         <section class="about-section" id="bio">
             <h2>Bio</h2>

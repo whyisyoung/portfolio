@@ -99,36 +99,27 @@ class ModernGallery {
 
     const filteredImages = this.getFilteredImages();
     const rows = this.createHorizontalRows(filteredImages);
-
     rows.forEach(row => {
       const rowElement = document.createElement('div');
       rowElement.className = 'gallery-row';
-
       row.forEach((image, index) => {
         const item = document.createElement('div');
         item.className = 'gallery-item';
         item.dataset.category = image.category;
         item.style.width = `${image.displayWidth}px`;
-
         const img = document.createElement('img');
         img.src = image.thumb;
         img.alt = `Photo ${index + 1}`;
         img.loading = 'lazy';
         img.style.width = `${image.displayWidth}px`;
         img.style.height = `${image.displayHeight}px`;
-
         item.appendChild(img);
-
         item.addEventListener('click', () => {
-          const globalIndex = this.images.findIndex(img =>
-            img.src === image.src
-          );
+          const globalIndex = this.images.findIndex(img => img.src === image.src);
           this.openLightbox(globalIndex);
         });
-
         rowElement.appendChild(item);
       });
-
       gallery.appendChild(rowElement);
     });
   }
@@ -141,58 +132,40 @@ class ModernGallery {
 
   createHorizontalRows(images) {
     const rows = [];
-    const maxHeight = 250; // Fixed height like alicegao.com interiors
-    const containerWidth = 1160; // Available width (1200 - 40px padding)
-    const spacing = 24; // Tripled spacing
-
+    const maxHeight = 250;
+    const containerEl = document.querySelector('.gallery-container');
+    const containerWidth = Math.max(320, (containerEl ? containerEl.clientWidth : 1160) - 2);
+    // Responsive spacing scaling
+    const spacing = containerWidth < 480 ? 14 : containerWidth < 640 ? 16 : containerWidth < 900 ? 20 : 24;
     let currentImages = [...images];
-
     while (currentImages.length > 0) {
       let maxWidth = spacing * -1;
       let rowPhotos = [];
-
       while (true) {
         if (currentImages.length === 0) break;
-
         let photo = currentImages.shift();
         let photoWidth = (photo.width / photo.height) * maxHeight;
         maxWidth += photoWidth + spacing;
         rowPhotos.push(photo);
-
         if (maxWidth - spacing > containerWidth) {
-          // Calculate final dimensions to fit container width exactly
           let targetWidth = containerWidth - (rowPhotos.length - 1) * spacing;
           let sumWidth = 0;
-
-          for (let photo of rowPhotos) {
-            sumWidth += (photo.width / photo.height) * maxHeight;
-          }
-
-          let aspectRatio = sumWidth / targetWidth;
-          let finalHeight = maxHeight / aspectRatio;
-
-          // Apply final dimensions
-          rowPhotos.forEach(photo => {
-            photo.displayWidth = Math.round((photo.width / photo.height) * finalHeight);
-            photo.displayHeight = Math.round(finalHeight);
+          for (let p of rowPhotos) sumWidth += (p.width / p.height) * maxHeight;
+          let ar = sumWidth / targetWidth;
+          let finalHeight = maxHeight / ar;
+          rowPhotos.forEach(p => {
+            p.displayWidth = Math.round((p.width / p.height) * finalHeight);
+            p.displayHeight = Math.round(finalHeight);
           });
-
-          rows.push(rowPhotos);
-          break;
+          rows.push(rowPhotos); break;
         }
-
         if (currentImages.length === 0) {
-          // Last incomplete row - use original maxHeight
-          rowPhotos.forEach(photo => {
-            photo.displayWidth = Math.round((photo.width / photo.height) * maxHeight);
-            photo.displayHeight = maxHeight;
-          });
-          rows.push(rowPhotos);
-          break;
+          const finalH = containerWidth < 640 ? Math.min(220, maxHeight) : maxHeight;
+          rowPhotos.forEach(p => { p.displayWidth = Math.round((p.width / p.height) * finalH); p.displayHeight = finalH; });
+          rows.push(rowPhotos); break;
         }
       }
     }
-
     return rows;
   }
 
@@ -238,6 +211,46 @@ class ModernGallery {
 // Initialize gallery when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   new ModernGallery();
+
+  function adjustHeaderSpacer() {
+    const header = document.querySelector('.site-header');
+    const spacer = document.querySelector('.header-spacer');
+    if (header && spacer) {
+      spacer.style.height = header.offsetHeight + 'px';
+    }
+  }
+  adjustHeaderSpacer();
+
+  // Re-render gallery and adjust spacer on resize (debounced)
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      adjustHeaderSpacer();
+      const galleryEl = document.getElementById('gallery');
+      if (galleryEl) {
+        document.querySelectorAll('#gallery').forEach(g => { g.innerHTML = ''; });
+        new ModernGallery();
+      }
+    }, 160);
+  });
+
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.site-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const open = toggle.classList.toggle('open');
+      nav.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      if (window.innerWidth <= 640) {
+        toggle.classList.remove('open');
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    }));
+  }
 });
 
 window.addEventListener('scroll', () => {
