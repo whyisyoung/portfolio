@@ -80,7 +80,7 @@ body {
   z-index: 500;
 }
 
-/* Thin 1px bars baseline-aligned: cluster sits just above bottom to match title baseline */
+/* Thin 1px bars center-aligned within hamburger button */
 .nav-toggle span {
   position: absolute;
   left: 0;
@@ -89,25 +89,24 @@ body {
   background: #111;
   border-radius: 0;
   transition: .32s ease;
-  top: auto;
 }
 
-/* Use bottom offsets so lowest bar hugs the baseline; gaps = 8px */
-.nav-toggle span:nth-child(3) {
-  bottom: 0;
+/* Center the 3 lines with 8px gaps between them */
+.nav-toggle span:nth-child(1) {
+  top: calc(50% - 8px);
 }
 
 .nav-toggle span:nth-child(2) {
-  bottom: 8px;
+  top: calc(50% - 0.5px);
 }
 
-.nav-toggle span:nth-child(1) {
-  bottom: 16px;
+.nav-toggle span:nth-child(3) {
+  top: calc(50% + 7px);
 }
 
-/* Open (X) state: move top/bottom bars to middle line (8px from bottom) */
+/* Open (X) state: move all bars to center and rotate */
 .nav-toggle.open span:nth-child(1) {
-  bottom: 8px;
+  top: calc(50% - 0.5px);
   transform: rotate(45deg);
 }
 
@@ -116,7 +115,7 @@ body {
 }
 
 .nav-toggle.open span:nth-child(3) {
-  bottom: 8px;
+  top: calc(50% - 0.5px);
   transform: rotate(-45deg);
 }
 
@@ -220,12 +219,12 @@ body {
     padding: 20px 0 16px;
   }
 
-  /* Align hamburger with gallery padding (remove extra right adjust) */
+  /* Center-align hamburger with title on mobile */
   .site-header-inner {
     padding-left: 26px;
     padding-right: 26px;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
   }
 
   .site-title {
@@ -233,11 +232,9 @@ body {
     line-height: 1;
     letter-spacing: 0.075em;
     margin: 0;
-    display: flex;
-    align-items: flex-end;
   }
 
-  /* Ensure hamburger matches the exact visual height of title */
+  /* Hamburger matches title height and centers perfectly */
   .nav-toggle {
     height: clamp(1.34rem, 6.0vw, 1.78rem);
   }

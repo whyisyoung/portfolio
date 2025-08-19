@@ -34,6 +34,7 @@
     /* increased spacing for readability */
     font-size: .95rem;
     line-height: 1.62;
+    text-align: justify;
 }
 
 .about-section p:last-child {

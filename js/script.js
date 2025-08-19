@@ -209,8 +209,16 @@ class ModernGallery {
 }
 
 // Initialize gallery when DOM is loaded
+function initGallery() {
+  const galleryEl = document.getElementById('gallery');
+  if (galleryEl) {
+    new ModernGallery();
+  }
+}
+window.initGallery = initGallery;
+
 document.addEventListener('DOMContentLoaded', () => {
-  new ModernGallery();
+  initGallery();
 
   function adjustHeaderSpacer() {
     const header = document.querySelector('.site-header');
@@ -219,7 +227,9 @@ document.addEventListener('DOMContentLoaded', () => {
       spacer.style.height = header.offsetHeight + 'px';
     }
   }
-  adjustHeaderSpacer();
+
+  // Wait for header to be inserted by shared-header.js
+  setTimeout(adjustHeaderSpacer, 10);
 
   // Re-render gallery and adjust spacer on resize (debounced)
   let resizeTimer;
@@ -229,28 +239,11 @@ document.addEventListener('DOMContentLoaded', () => {
       adjustHeaderSpacer();
       const galleryEl = document.getElementById('gallery');
       if (galleryEl) {
-        document.querySelectorAll('#gallery').forEach(g => { g.innerHTML = ''; });
-        new ModernGallery();
+        galleryEl.innerHTML = '';
+        initGallery();
       }
     }, 160);
   });
-
-  const toggle = document.querySelector('.nav-toggle');
-  const nav = document.querySelector('.site-nav');
-  if (toggle && nav) {
-    toggle.addEventListener('click', () => {
-      const open = toggle.classList.toggle('open');
-      nav.classList.toggle('open', open);
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      if (window.innerWidth <= 640) {
-        toggle.classList.remove('open');
-        nav.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-      }
-    }));
-  }
 });
 
 window.addEventListener('scroll', () => {
