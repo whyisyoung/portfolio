@@ -57,7 +57,7 @@ body {
   width: 100%;
   max-width: var(--page-max-width);
   padding-left: var(--page-pad-x);
-  padding-right: calc(var(--page-pad-x) + var(--header-right-adjust));
+  padding-right: var(--page-pad-x);
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -206,7 +206,7 @@ body {
 
   .site-header-inner {
     padding-left: 40px;
-    padding-right: calc(40px + var(--header-right-adjust));
+    padding-right: 40px;
   }
 
   .site-nav {
@@ -506,7 +506,7 @@ html {
   width: 100%;
   max-width: var(--page-max-width);
   padding-left: var(--page-pad-x);
-  padding-right: calc(var(--page-pad-x) + var(--header-right-adjust));
+  padding-right: var(--page-pad-x);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -565,14 +565,14 @@ html {
 @media (max-width:900px) {
   .site-footer-inner {
     padding-left: 40px;
-    padding-right: calc(40px + var(--header-right-adjust));
+    padding-right: 40px;
   }
 }
 
 @media (max-width:640px) {
   .site-footer-inner {
     padding-left: 28px;
-    padding-right: calc(28px + var(--header-right-adjust));
+    padding-right: 28px;
   }
 
   .footer-icons a {
