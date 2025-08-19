@@ -60,9 +60,36 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Now that URL is updated, init the gallery
                     const pagePath = new URL(url).pathname;
                     if (pagePath.endsWith('index.html') || pagePath === '/') {
-                        if (window.initGallery) {
-                            window.initGallery();
+                        // Clear any existing gallery content first
+                        const galleryEl = document.getElementById('gallery');
+                        if (galleryEl) {
+                            galleryEl.innerHTML = '';
                         }
+
+                        // Force re-evaluation of scripts for gallery page
+                        const scripts = doc.querySelectorAll('script[src]');
+                        const loadedScripts = new Set();
+
+                        scripts.forEach(script => {
+                            const src = script.getAttribute('src');
+                            if (src && !loadedScripts.has(src) && !document.querySelector(`script[src="${src}"]`)) {
+                                const newScript = document.createElement('script');
+                                newScript.src = src;
+                                if (script.defer) newScript.defer = true;
+                                document.head.appendChild(newScript);
+                                loadedScripts.add(src);
+                            }
+                        });
+
+                        // Longer delay to ensure scripts are loaded and gallery can initialize
+                        setTimeout(() => {
+                            if (window.initGallery) {
+                                console.log('Calling initGallery from SPA navigation');
+                                window.initGallery();
+                            } else {
+                                console.error('initGallery function not available');
+                            }
+                        }, 200);
                     }
 
                     // Update active nav link
@@ -100,6 +127,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // If it's a hash link for the current page path, let other scripts handle it
             if (linkUrl.hash && linkUrl.pathname === currentUrl.pathname) {
+                return;
+            }
+
+            // Skip SPA navigation for main gallery page to avoid issues
+            if (linkUrl.pathname.endsWith('index.html') || linkUrl.pathname === '/') {
+                // Let the browser handle this normally
                 return;
             }
 

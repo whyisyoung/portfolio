@@ -26,9 +26,11 @@ class ModernGallery {
 
   async loadImages() {
     try {
+      console.log('Loading images...');
       const response = await fetch('config.json');
       const config = await response.json();
       this.images = this.convertConfig(config);
+      console.log('Images loaded:', this.images.length);
     } catch (error) {
       console.error('Error loading images:', error);
     }
@@ -95,9 +97,17 @@ class ModernGallery {
 
   renderGallery() {
     const gallery = document.getElementById('gallery');
+    if (!gallery) {
+      console.error('Gallery element not found');
+      return;
+    }
+
+    console.log('Rendering gallery with', this.images.length, 'images');
     gallery.innerHTML = '';
 
     const filteredImages = this.getFilteredImages();
+    console.log('Filtered images:', filteredImages.length);
+
     const rows = this.createHorizontalRows(filteredImages);
     rows.forEach(row => {
       const rowElement = document.createElement('div');
@@ -209,10 +219,23 @@ class ModernGallery {
 }
 
 // Initialize gallery when DOM is loaded
+let currentGalleryInstance = null;
+
 function initGallery() {
+  console.log('initGallery called');
   const galleryEl = document.getElementById('gallery');
+  console.log('Gallery element found:', !!galleryEl);
+
   if (galleryEl) {
-    new ModernGallery();
+    // Clean up any existing instance
+    if (currentGalleryInstance) {
+      console.log('Cleaning up existing gallery instance');
+      currentGalleryInstance = null;
+    }
+
+    // Create new instance
+    console.log('Creating new gallery instance');
+    currentGalleryInstance = new ModernGallery();
   }
 }
 window.initGallery = initGallery;
