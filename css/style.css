@@ -397,15 +397,78 @@ body {
   backdrop-filter: blur(10px);
 }
 
+/* Mobile lightbox fixes */
+@media (max-width: 768px) {
+  .lightbox {
+    /* Ensure full viewport coverage on mobile */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .lightbox-content {
+    /* Better mobile positioning */
+    max-width: 95vw;
+    max-height: 85vh;
+    /* Ensure image is properly centered */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Prevent any margins */
+    margin: 0;
+    /* Ensure image scales properly */
+    object-fit: contain;
+    width: auto;
+    height: auto;
+  }
+  
+  .close {
+    /* Make close button more accessible on mobile */
+    top: 10px;
+    right: 15px;
+    font-size: 35px;
+    /* Larger touch target */
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .nav-buttons {
+    /* Adjust navigation for mobile */
+    bottom: 20px;
+    top: auto;
+    transform: none;
+    padding: 0 20px;
+  }
+  
+  .prev, .next {
+    /* Larger touch targets on mobile */
+    padding: 15px 18px;
+    font-size: 20px;
+  }
+}
+
 .lightbox-content {
-  margin: auto;
-  display: block;
-  max-width: 90%;
-  max-height: 90%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
   border-radius: 4px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
 }
