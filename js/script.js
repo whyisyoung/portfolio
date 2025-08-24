@@ -123,6 +123,13 @@ class ModernGallery {
         img.loading = 'lazy';
         img.style.width = `${image.displayWidth}px`;
         img.style.height = `${image.displayHeight}px`;
+        
+        // Prevent layout reflow
+        img.onload = () => {
+          img.style.minHeight = 'auto';
+          img.style.backgroundColor = 'transparent';
+        };
+        
         item.appendChild(img);
         item.addEventListener('click', () => {
           const globalIndex = this.images.findIndex(img => img.src === image.src);
@@ -256,21 +263,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Re-render gallery and adjust spacer on resize (debounced)
   let resizeTimer;
+  let lastWidth = window.innerWidth;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      adjustHeaderSpacer();
-      const galleryEl = document.getElementById('gallery');
-      if (galleryEl) {
-        galleryEl.innerHTML = '';
-        initGallery();
+      // Only re-render when width actually changes
+      const currentWidth = window.innerWidth;
+      if (Math.abs(currentWidth - lastWidth) > 50) {
+        adjustHeaderSpacer();
+        const galleryEl = document.getElementById('gallery');
+        if (galleryEl && currentGalleryInstance) {
+          currentGalleryInstance.renderGallery();
+        }
+        lastWidth = currentWidth;
       }
-    }, 160);
+    }, 300); // Increase delay to reduce trigger frequency
   });
 });
 
+// Optimize scroll event handling
+let scrollTimer;
 window.addEventListener('scroll', () => {
-  const h = document.querySelector('.site-header');
-  if (!h) return;
-  h.classList.toggle('is-scrolled', window.scrollY > 8);
+  if (scrollTimer) return;
+  
+  scrollTimer = requestAnimationFrame(() => {
+    const h = document.querySelector('.site-header');
+    if (h) {
+      h.classList.toggle('is-scrolled', window.scrollY > 8);
+    }
+    scrollTimer = null;
+  });
 });

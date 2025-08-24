@@ -36,6 +36,11 @@ body {
   line-height: 1.6;
   color: #333;
   background: #fff;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  /* Prevent iOS Safari bounce */
+  position: relative;
+  overflow-x: hidden;
 }
 
 /* Header */
@@ -339,6 +344,9 @@ body {
   width: 100%;
   height: auto;
   display: block;
+  /* Prevent layout reflow */
+  min-height: 150px;
+  background-color: #f5f5f5;
 }
 
 /* Responsive spacing tweaks for smaller widths */
@@ -370,16 +378,6 @@ body {
   .gallery-item {
     margin-right: 14px;
   }
-}
-
-.gallery-item:hover {
-  opacity: .8;
-}
-
-.gallery-item img {
-  width: 100%;
-  height: auto;
-  display: block;
 }
 
 .gallery-item.hidden {
@@ -459,9 +457,37 @@ body {
   transform: scale(1.1);
 }
 
-@media (max-width:768px) {
+/* Mobile scrolling optimization */
+@media (max-width: 768px) {
+  html {
+    /* Prevent mobile zoom from causing scroll issues */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  
+  body {
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    /* Prevent scroll bounce */
+    overscroll-behavior-y: contain;
+  }
+  
   .gallery-container {
     padding: 0 40px 3rem;
+  }
+  
+  .gallery-item {
+    /* Reduce mobile animations for better performance */
+    animation: none;
+    transition: opacity 0.2s ease;
+  }
+  
+  .gallery-item img {
+    /* Mobile hardware acceleration */
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    will-change: auto;
   }
 }
 
@@ -483,9 +509,7 @@ body {
   }
 }
 
-html {
-  scroll-behavior: smooth;
-}
+
 
 /* Footer */
 .site-footer {
