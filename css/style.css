@@ -535,8 +535,6 @@ body {
     width: 100vw;
     height: 100vh;
     background: rgba(255, 255, 255, 0.98);
-    /* Add temporary debug background */
-    background: rgba(255, 200, 200, 0.98);
   }
   
   .lightbox-header {
@@ -566,9 +564,6 @@ body {
     /* Ensure image is always visible */
     min-width: 200px;
     min-height: 200px;
-    /* Debug: add visible border */
-    border: 2px solid red;
-    background: rgba(0, 255, 0, 0.3);
   }
 
   .lightbox-header-inner {
