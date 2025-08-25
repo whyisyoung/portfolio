@@ -195,34 +195,11 @@ class ModernGallery {
     const lightbox = document.getElementById('lightbox');
     const img = document.getElementById('lightbox-img');
 
-    // Clear previous image and show loading state
-    img.src = '';
-    img.style.display = 'none';
+    // Set image source directly for faster loading
+    img.src = this.images[index].src;
+    img.style.display = 'block';
     
-    // Load new image
-    const newImg = new Image();
-    newImg.onload = () => {
-      img.src = newImg.src;
-      img.style.display = 'block';
-      
-      // Force a reflow on mobile to ensure proper positioning
-      if (window.innerWidth <= 768) {
-        setTimeout(() => {
-          img.style.transform = 'scale(0.99)';
-          requestAnimationFrame(() => {
-            img.style.transform = 'scale(1)';
-          });
-        }, 10);
-      }
-    };
-    
-    newImg.onerror = () => {
-      console.error('Failed to load image:', this.images[index].src);
-      img.src = this.images[index].thumb; // Fallback to thumbnail
-      img.style.display = 'block';
-    };
-    
-    newImg.src = this.images[index].src;
+    // Show lightbox
     lightbox.style.display = 'block';
     document.body.style.overflow = 'hidden';
     
@@ -230,17 +207,26 @@ class ModernGallery {
     if (window.innerWidth <= 768) {
       document.body.style.position = 'fixed';
       document.body.style.width = '100%';
+      document.body.style.top = `-${window.scrollY}px`;
     }
   }
 
   closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
+    const lightbox = document.getElementById('lightbox');
+    lightbox.style.display = 'none';
+    
+    // Reset body styles
     document.body.style.overflow = 'auto';
     
     // Reset mobile-specific styles
     if (window.innerWidth <= 768) {
+      const scrollY = document.body.style.top;
       document.body.style.position = 'relative';
       document.body.style.width = 'auto';
+      document.body.style.top = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     }
   }
 
@@ -260,32 +246,7 @@ class ModernGallery {
 
   updateLightboxImage() {
     const img = document.getElementById('lightbox-img');
-    
-    // Use the same loading pattern as openLightbox
-    img.style.display = 'none';
-    
-    const newImg = new Image();
-    newImg.onload = () => {
-      img.src = newImg.src;
-      img.style.display = 'block';
-      
-      // Force reflow on mobile
-      if (window.innerWidth <= 768) {
-        setTimeout(() => {
-          img.style.transform = 'scale(0.99)';
-          requestAnimationFrame(() => {
-            img.style.transform = 'scale(1)';
-          });
-        }, 10);
-      }
-    };
-    
-    newImg.onerror = () => {
-      img.src = this.images[this.currentImageIndex].thumb;
-      img.style.display = 'block';
-    };
-    
-    newImg.src = this.images[this.currentImageIndex].src;
+    img.src = this.images[this.currentImageIndex].src;
   }
 }
 
