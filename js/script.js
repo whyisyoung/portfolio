@@ -88,7 +88,13 @@ class ModernGallery {
     const lightbox = document.getElementById('lightbox');
     if (lightbox) {
       lightbox.addEventListener('click', (e) => {
-        if (e.target.id === 'lightbox' || e.target.classList.contains('close')) this.closeLightbox();
+        // Don't close lightbox if clicking on links or interactive elements
+        if (e.target.tagName === 'A' || e.target.closest('a')) {
+          return; // Allow link navigation
+        }
+        if (e.target.id === 'lightbox' || e.target.classList.contains('close')) {
+          this.closeLightbox();
+        }
       });
     }
 
