@@ -7,6 +7,18 @@ class ModernGallery {
   }
 
   async init() {
+    // Ensure lightbox is hidden on initialization
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+      lightbox.style.display = 'none';
+    }
+    
+    // Reset body styles that might have been set by lightbox
+    document.body.style.overflow = 'auto';
+    document.body.style.position = 'relative';
+    document.body.style.width = 'auto';
+    document.body.style.top = '';
+    
     await this.loadImages();
     this.setupEventListeners();
     const galleryEl = document.getElementById('gallery');
@@ -72,13 +84,23 @@ class ModernGallery {
       }
     });
 
-    // Lightbox close
-    document.getElementById('lightbox').addEventListener('click', (e) => {
-      if (e.target.id === 'lightbox' || e.target.classList.contains('close')) this.closeLightbox();
-    });
+    // Lightbox close - only add listener if lightbox exists
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+      lightbox.addEventListener('click', (e) => {
+        if (e.target.id === 'lightbox' || e.target.classList.contains('close')) this.closeLightbox();
+      });
+    }
 
-    document.querySelector('.prev').addEventListener('click', () => this.prevImage());
-    document.querySelector('.next').addEventListener('click', () => this.nextImage());
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+    
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => this.prevImage());
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => this.nextImage());
+    }
 
     document.addEventListener('keydown', (e) => {
       if (document.getElementById('lightbox').style.display !== 'block') return;
@@ -253,8 +275,26 @@ class ModernGallery {
 // Initialize gallery when DOM is loaded
 let currentGalleryInstance = null;
 
+// Global function to reset lightbox state
+function resetLightboxState() {
+  const lightbox = document.getElementById('lightbox');
+  if (lightbox) {
+    lightbox.style.display = 'none';
+  }
+  
+  // Reset body styles
+  document.body.style.overflow = 'auto';
+  document.body.style.position = 'relative';
+  document.body.style.width = 'auto';
+  document.body.style.top = '';
+}
+
 function initGallery() {
   console.log('initGallery called');
+  
+  // Always reset lightbox state first
+  resetLightboxState();
+  
   const galleryEl = document.getElementById('gallery');
   console.log('Gallery element found:', !!galleryEl);
 
@@ -303,6 +343,18 @@ document.addEventListener('DOMContentLoaded', () => {
         lastWidth = currentWidth;
       }
     }, 300); // Increase delay to reduce trigger frequency
+  });
+  
+  // Reset lightbox when page becomes visible (handles navigation issues)
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      resetLightboxState();
+    }
+  });
+  
+  // Also reset lightbox on page focus
+  window.addEventListener('focus', () => {
+    resetLightboxState();
   });
 });
 
