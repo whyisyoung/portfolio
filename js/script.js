@@ -281,6 +281,29 @@ class ModernGallery {
 // Initialize gallery when DOM is loaded
 let currentGalleryInstance = null;
 
+// Global function to close lightbox and return to home
+function closeLightboxAndReturnHome() {
+  if (currentGalleryInstance) {
+    currentGalleryInstance.closeLightbox();
+  }
+  // Reset any filters and show all photos
+  if (currentGalleryInstance) {
+    currentGalleryInstance.currentFilter = 'all';
+    // Update nav links
+    document.querySelectorAll('.site-nav .nav-link').forEach(l => {
+      if (l.dataset.filter === 'all') {
+        l.classList.add('active');
+      } else {
+        l.classList.remove('active');
+      }
+    });
+    // Re-render gallery to show all photos
+    currentGalleryInstance.renderGallery();
+  }
+  // Update URL hash
+  window.history.replaceState(null, '', window.location.pathname);
+}
+
 // Global function to reset lightbox state
 function resetLightboxState() {
   const lightbox = document.getElementById('lightbox');
