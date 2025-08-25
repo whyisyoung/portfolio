@@ -452,6 +452,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   margin-top: 40px; /* Account for header */
+  z-index: 1000; /* Ensure image is visible but below navigation */
 }
 
 .close {
@@ -529,50 +530,68 @@ body {
   .lightbox-header {
     padding: 20px 0 16px;
   }
-  
+
   .lightbox-header-inner {
     padding-left: 40px;
     padding-right: 40px;
   }
-  
+
   .lightbox-title {
     font-size: clamp(1.34rem, 6.0vw, 1.78rem);
     line-height: 1;
     letter-spacing: 0.075em;
   }
-  
+
   .lightbox-content {
     max-width: 90vw;
     max-height: 70vh;
     margin-top: 30px;
   }
-  
+
   .close {
     font-size: 22px;
   }
-  
+
   .nav-buttons {
-    /* Full coverage for easy touch targets */
+    /* Positioned to not cover the center image area */
     position: absolute;
-    top: 0;
+    top: 120px; /* Below header */
     left: 0;
     right: 0;
     bottom: 0;
+    display: flex;
+    pointer-events: none;
   }
-  
+
   .prev, .next {
-    /* Larger touch areas on mobile */
-    flex: 1;
+    /* Side touch areas that don't cover the image */
+    flex: none;
+    width: 80px;
     min-height: 60px;
     /* Keep pointer cursor on mobile since custom cursors may not work well */
     cursor: pointer !important;
+    pointer-events: auto;
   }
-  
+
+  .prev {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  .next {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
   /* More visible hover feedback on mobile */
   .prev:active {
     background: linear-gradient(to right, rgba(0, 0, 0, 0.1), transparent);
   }
-  
+
   .next:active {
     background: linear-gradient(to left, rgba(0, 0, 0, 0.1), transparent);
   }
@@ -585,7 +604,7 @@ body {
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
   }
-  
+
   body {
     -webkit-overflow-scrolling: touch;
     -webkit-transform: translate3d(0,0,0);
@@ -593,17 +612,17 @@ body {
     /* Prevent scroll bounce */
     overscroll-behavior-y: contain;
   }
-  
+
   .gallery-container {
     padding: 0 40px 3rem;
   }
-  
+
   .gallery-item {
     /* Reduce mobile animations for better performance */
     animation: none;
     transition: opacity 0.2s ease;
   }
-  
+
   .gallery-item img {
     /* Mobile hardware acceleration */
     -webkit-transform: translate3d(0,0,0);
