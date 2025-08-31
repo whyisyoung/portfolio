@@ -9,6 +9,14 @@
       "placeholder_path": "./photos/Lifestyle/Limin_Yang_francis_gallery_1.placeholder.jpg"
     },
     {
+      "width": 3552,
+      "height": 2368,
+      "path": "./photos/Lifestyle/L1010388_s.jpg",
+      "compressed_path": "./photos/Lifestyle/L1010388_s.min.jpg",
+      "compressed": false,
+      "placeholder_path": "./photos/Lifestyle/L1010388_s.placeholder.jpg"
+    },
+    {
       "width": 1080,
       "height": 1618,
       "path": "./photos/Lifestyle/Limin_Yang_edith_farnswarth_2.jpg",
@@ -95,6 +103,14 @@
       "compressed_path": "./photos/Lifestyle/Limin_Yang_GZ_IMG_3835.min.jpg",
       "compressed": false,
       "placeholder_path": "./photos/Lifestyle/Limin_Yang_GZ_IMG_3835.placeholder.jpg"
+    },
+    {
+      "width": 3005,
+      "height": 2000,
+      "path": "./photos/Lifestyle/L1020618_s.jpg",
+      "compressed_path": "./photos/Lifestyle/L1020618_s.min.jpg",
+      "compressed": false,
+      "placeholder_path": "./photos/Lifestyle/L1020618_s.placeholder.jpg"
     },
     {
       "width": 1000,
